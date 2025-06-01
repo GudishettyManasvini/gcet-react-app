@@ -8,18 +8,41 @@ function Register() {
     email: "",
     password: ""
   });
+  const [welcomeMsg, setWelcomeMsg] = useState("");
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+    setError("");
+    setWelcomeMsg("");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Registered:", formData);
-    navigate("/");
+    // Retrieve users from localStorage
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    // Check if email already exists
+    const userExists = users.some(u => u.email === formData.email);
+    if (userExists) {
+      setError("User with this email already exists. Please login.");
+      return;
+    }
+
+    // Add new user
+    users.push(formData);
+    localStorage.setItem("users", JSON.stringify(users));
+
+    setWelcomeMsg(`Welcome to my store, ${formData.name}! Enjoy shopping.`);
+    setError("");
+
+    // Delay navigation to home page to show welcome message
+    setTimeout(() => {
+      navigate("/");
+    }, 2000);
   };
 
   return (
@@ -58,6 +81,8 @@ function Register() {
 
         <button type="submit">Register</button>
       </form>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {welcomeMsg && <p style={{ color: "green" }}>{welcomeMsg}</p>}
     </div>
   );
 }

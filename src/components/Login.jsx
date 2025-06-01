@@ -7,18 +7,42 @@ function Login() {
     email: "",
     password: ""
   });
+  const [error, setError] = useState("");
+  const [welcomeMsg, setWelcomeMsg] = useState("");
 
   const handleChange = (e) => {
     setLoginData({
       ...loginData,
       [e.target.name]: e.target.value
     });
+    setError("");
+    setWelcomeMsg("");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Login:", loginData);
-    navigate("/");
+    // Retrieve users from localStorage
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    // Find user by email
+    const user = users.find(u => u.email === loginData.email);
+
+    if (!user) {
+      setError("User not found. Please register first.");
+      return;
+    }
+
+    if (user.password !== loginData.password) {
+      setError("Incorrect password.");
+      return;
+    }
+
+    // Success login
+    setWelcomeMsg(`Welcome to my store, ${user.name}! Enjoy shopping.`);
+    setError("");
+    // Optionally delay navigation to show welcome message
+    setTimeout(() => {
+      navigate("/");
+    }, 5000);
   };
 
   return (
@@ -50,6 +74,8 @@ function Login() {
           Register Account
         </button>
       </form>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {welcomeMsg && <p style={{ color: "green" }}>{welcomeMsg}</p>}
     </div>
   );
 }
