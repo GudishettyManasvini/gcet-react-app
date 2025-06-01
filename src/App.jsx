@@ -1,29 +1,30 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Product from "./components/Product";
 import Cart from "./components/Cart";
 import Login from "./components/Login";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Register from "./components/Register"; // Make sure this file exists
+
 function App() {
   return (
     <div>
       <BrowserRouter>
         <header>
-          <h1>React Store</h1>
-          <Link to="/">Home</Link>-
-          <Link to="/cart">Cart</Link>-
-          <Link to="/login">Login</Link>
+          <h1>My Store</h1>
+          <nav>
+            <Link to="/">Home</Link> -
+            <Link to="/cart">Cart</Link> -
+            <Link to="/login">Login</Link>
+          </nav>
           <hr />
         </header>
 
         <main>
           <Routes>
             <Route index element={<Product />} />
-            <Route path="/" element={<Product/>}></Route>
-            <Route path="/cart" element={<Cart/>}></Route>
-            <Route path="/login" element={<Login/>}></Route>
+            <Route path="/" element={<Product />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} /> {/* New Route */}
           </Routes>
         </main>
 
@@ -35,4 +36,5 @@ function App() {
     </div>
   );
 }
+
 export default App;
