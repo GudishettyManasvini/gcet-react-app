@@ -17,46 +17,38 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Login Details:", loginData);
-    navigate("/"); // Redirect to Home Page
-  };
-
-  const goToRegister = () => {
-    navigate("/register");
+    console.log("Login:", loginData);
+    navigate("/");
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div className="form-container">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          <input
-            type="email"
-            name="email"
-            placeholder="Enter Email"
-            value={loginData.email}
-            onChange={handleChange}
-            required
-          />
-        </div><br />
-        <div>
-          <input
-            type="password"
-            name="password"
-            placeholder="Enter Password"
-            value={loginData.password}
-            onChange={handleChange}
-            required
-          />
-        </div><br />
-        <div>
-          <button type="submit">Submit</button>
-        </div><br />
-        <div>
-          <button type="button" onClick={goToRegister}>
-            Register Account
-          </button>
-        </div>
+        <label>Email:</label>
+        <input
+          type="email"
+          name="email"
+          placeholder="Enter Email"
+          value={loginData.email}
+          onChange={handleChange}
+          required
+        />
+
+        <label>Password:</label>
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter Password"
+          value={loginData.password}
+          onChange={handleChange}
+          required
+        />
+
+        <button type="submit">Login</button>
+        <button type="button" onClick={() => navigate("/register")}>
+          Register Account
+        </button>
       </form>
     </div>
   );
