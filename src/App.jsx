@@ -3,6 +3,7 @@ import Product from "./components/Product";
 import Cart from "./components/Cart";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Welcome from "./components/Welcome";  // ✅ Make sure this path is correct
 import "./App.css";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/welcome" element={<Welcome />} /> {/* ✅ Added this line */}
           </Routes>
         </main>
 

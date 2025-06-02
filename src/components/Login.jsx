@@ -8,7 +8,6 @@ function Login() {
     password: ""
   });
   const [error, setError] = useState("");
-  const [welcomeMsg, setWelcomeMsg] = useState("");
 
   const handleChange = (e) => {
     setLoginData({
@@ -16,14 +15,11 @@ function Login() {
       [e.target.name]: e.target.value
     });
     setError("");
-    setWelcomeMsg("");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Retrieve users from localStorage
     const users = JSON.parse(localStorage.getItem("users")) || [];
-    // Find user by email
     const user = users.find(u => u.email === loginData.email);
 
     if (!user) {
@@ -36,13 +32,8 @@ function Login() {
       return;
     }
 
-    // Success login
-    setWelcomeMsg(`Welcome to my store, ${user.name}! Enjoy shopping.`);
-    setError("");
-    // Optionally delay navigation to show welcome message
-    setTimeout(() => {
-      navigate("/");
-    }, 5000);
+    // ✅ Redirect to /welcome and pass username
+    navigate("/welcome", { state: { username: user.name } });
   };
 
   return (
@@ -75,7 +66,6 @@ function Login() {
         </button>
       </form>
       {error && <p style={{ color: "red" }}>{error}</p>}
-      {welcomeMsg && <p style={{ color: "green" }}>{welcomeMsg}</p>}
     </div>
   );
 }
