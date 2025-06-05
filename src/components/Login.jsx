@@ -1,73 +1,66 @@
-import { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AppContext } from "../App"; 
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import '../App.css';
 
-function Login() {
+export default function Login() {
+  const { setUser } = useContext(AppContext); 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [msg, setMsg] = useState(""); 
   const navigate = useNavigate();
-  const [loginData, setLoginData] = useState({
-    email: "",
-    password: ""
-  });
-  const [error, setError] = useState("");
+  const API = import.meta.env.VITE_API_URL;
 
-  const handleChange = (e) => {
-    setLoginData({
-      ...loginData,
-      [e.target.name]: e.target.value
-    });
-    setError("");
+  const handleLogin = async () => {
+    const url = `${API}/login`;
+
+    try {
+     
+      const response = await axios.post(url, { email, password });
+
+      if (response.data.token) {
+        setUser(response.data); 
+        navigate("/");
+      } else {
+        setMsg("Invalid User or Password");
+      }
+    } catch (error) {
+      setMsg("Login failed. Please try again.");
+      console.error(error);
+    }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-    const user = users.find(u => u.email === loginData.email);
-
-    if (!user) {
-      setError("User not found. Please register first.");
-      return;
-    }
-
-    if (user.password !== loginData.password) {
-      setError("Incorrect password.");
-      return;
-    }
-
-    // ✅ Redirect to /welcome and pass username
-    navigate("/welcome", { state: { username: user.name } });
+  const handleCreateAccount = () => {
+    navigate("/register");
   };
 
   return (
     <div className="form-container">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          placeholder="Enter Email"
-          value={loginData.email}
-          onChange={handleChange}
-          required
-        />
+      <h3 className="form-title">Login</h3>
 
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          placeholder="Enter Password"
-          value={loginData.password}
-          onChange={handleChange}
-          required
-        />
+      {msg && <p className="error-msg">{msg}</p>}
 
-        <button type="submit">Login</button>
-        <button type="button" onClick={() => navigate("/register")}>
-          Register Account
-        </button>
-      </form>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={e => setPassword(e.target.value)}
+      />
+      <button onClick={handleLogin}>Submit</button>
+
+      <button
+        style={{ marginTop: "12px", backgroundColor: "#f9dcdc", color: "#d86c7a" }}
+        onClick={handleCreateAccount}
+      >
+        Create Account
+      </button>
     </div>
   );
 }
-
-export default Login;

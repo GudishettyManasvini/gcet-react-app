@@ -1,42 +1,37 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { useState, createContext } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Product from "./components/Product";
 import Cart from "./components/Cart";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Welcome from "./components/Welcome";  // ✅ Make sure this path is correct
-import "./App.css";
+import Logout from "./components/Logout";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+
+export const AppContext = createContext();
 
 function App() {
-  return (
-    <div>
-      <BrowserRouter>
-        <header>
-          <h1>My Store</h1>
-          <nav>
-            <Link to="/">Home</Link> -
-            <Link to="/cart">Cart</Link> -
-            <Link to="/login">Login</Link>
-          </nav>
-          <hr />
-        </header>
+  const [users, setUsers] = useState([]);
+  const [user, setUser] = useState(null);
+  const [cart, setCart] = useState([]); // ✅ Added cart state
 
+  return (
+    <AppContext.Provider value={{ users, setUsers, user, setUser, cart, setCart }}>
+      <BrowserRouter>
+        <Header />
         <main>
           <Routes>
-            <Route index element={<Product />} />
             <Route path="/" element={<Product />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/logout" element={<Logout />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/welcome" element={<Welcome />} /> {/* ✅ Added this line */}
           </Routes>
         </main>
-
-        <footer>
-          <hr />
-          &copy; 2005. All rights Reserved.
-        </footer>
+        <Footer />
       </BrowserRouter>
-    </div>
+    </AppContext.Provider>
   );
 }
 

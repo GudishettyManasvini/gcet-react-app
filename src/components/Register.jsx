@@ -1,80 +1,60 @@
-import { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AppContext } from "../App"; 
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import '../App.css';
 
-function Register() {
+export default function Register() {
+  const { setUsers } = useContext(AppContext); 
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [msg, setMsg] = useState("");
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: ""
-  });
-  const [error, setError] = useState("");
+  const API = import.meta.env.VITE_API_URL;
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-    setError("");
-  };
+  const handleSubmit = async () => {
+  const user = { name, email, password };
+ 
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const users = JSON.parse(localStorage.getItem("users")) || [];
+  try {
+    const url = `${API}/register`;
+    const response = await axios.post(url, user);
 
-    const userExists = users.some(u => u.email === formData.email);
-    if (userExists) {
-      setError("User with this email already exists. Please login.");
-      return;
-    }
 
-    users.push(formData);
-    localStorage.setItem("users", JSON.stringify(users));
+    navigate("/login");
+  } catch (err) {
+    console.error("Error:", err.response?.data || err.message); 
+    setMsg("Registration failed. Please try again.");
+  }
+};
 
-    // Navigate to welcome page with username
-    navigate("/welcome", { state: { username: formData.name } });
-  };
 
   return (
     <div className="form-container">
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Name:</label>
-        <input
-          type="text"
-          name="name"
-          placeholder="Enter Name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
+      <h3 className="form-title">Register</h3>
 
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          placeholder="Enter Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
+      {msg && <p className="error-msg">{msg}</p>}
 
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          placeholder="Enter Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-
-        <button type="submit">Register</button>
-      </form>
-
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      <input
+        type="text"
+        placeholder="Name"
+        value={name}
+        onChange={e => setName(e.target.value)}
+      />
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={e => setPassword(e.target.value)}
+      />
+      <button onClick={handleSubmit}>Submit</button>
     </div>
   );
 }
-
-export default Register;
