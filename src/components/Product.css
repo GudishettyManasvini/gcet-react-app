@@ -1,15 +1,15 @@
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* slightly narrower boxes */
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
   gap: 28px;
-  padding: 40px 16px; /* slightly less horizontal padding */
-  max-width: 1100px; /* reduced from 1200px */
+  padding: 40px 16px; 
+  max-width: 1100px; 
   margin: 0 auto;
 }
-/* Product Card - brighter pastel */
+
 .product-card {
   background: linear-gradient(to top right, #ffffff, #ffe4ec);
-  border: 2px solid #f9c5d1; /* stronger pastel pink border */
+  border: 2px solid #f9c5d1;
   border-radius: 18px;
    padding: 18px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
@@ -19,7 +19,7 @@
   overflow: hidden;
 }
 
-/* Decorative pastel shape */
+
 .product-card::before {
   content: "";
   position: absolute;
@@ -27,7 +27,7 @@
   left: -25px;
   width: 100px;
   height: 100px;
-  background: #a0e9e0; /* brighter pastel teal */
+  background: #a0e9e0; 
   opacity: 0.3;
   border-radius: 50%;
   z-index: 0;
@@ -38,9 +38,9 @@
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
 }
 
-/* Product Title */
+
 .product-card h4 {
-  color: #6a4c93; /* pastel purple */
+  color: #6a4c93; 
   margin-bottom: 10px;
   font-size: 20px;
   font-weight: 600;
@@ -48,19 +48,19 @@
   position: relative;
 }
 
-/* Description / Price */
+
 .product-card p {
   margin-bottom: 14px;
   font-weight: 500;
-  color: #444; /* strong enough for contrast */
+  color: #444;
   font-size: 15px;
   z-index: 1;
   position: relative;
 }
 
-/* Call-to-action Button */
+
 .product-card button {
-  background-color: #8ecae6; /* pastel blue */
+  background-color: #8ecae6; 
   color: #fff;
   border: none;
   padding: 10px 16px;
@@ -74,10 +74,10 @@
 }
 
 .product-card button:hover {
-  background-color: #62b3d0; /* slightly deeper blue */
+  background-color: #62b3d0; 
 }
 .form-container {
-  max-width: 1500px; /* or 100% if you want full width */
+  max-width: 1500px; 
   margin: 40px auto;
   background-color: #ffffff;
   padding: 30px;
