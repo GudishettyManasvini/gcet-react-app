@@ -1,76 +1,130 @@
-
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #fdf6f0; /* pastel peach */
+  background: linear-gradient(to right, #fdf6f0, #ffe8e0); /* soft gradient */
   margin: 0;
   padding: 0;
 }
 
+/* Keep your header and footer color */
 header, footer {
-  background-color: #8ecae6; /* pastel blue */
+  background-color: #8ecae6;
   color: white;
-  padding: 15px;
+  padding: 20px 10px;
   text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Navigation links inside header */
 nav a {
-  margin: 0 10px;
+  margin: 0 12px;
   color: white;
   text-decoration: none;
+  font-weight: 500;
+  font-size: 16px;
+  transition: color 0.3s ease;
 }
 
 nav a:hover {
   text-decoration: underline;
+  color: #ffd6c4; /* subtle hover color */
 }
 
+/* Main content area */
 main {
-  padding: 20px;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
+/* Stylish form container */
 .form-container {
-  max-width: 400px;
-  margin: 40px auto;
-  background-color: #ffffff;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+  max-width: 450px;
+  width: 100%;
+  background: linear-gradient(to bottom right, #ffffff, #fff0f4);
+  padding: 35px 30px;
+  border-radius: 20px;
+  box-shadow: 0px 8px 18px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.form-container:hover {
+  transform: scale(1.02);
 }
 
 .form-container h2 {
   text-align: center;
-  color: #6a4c93; /* pastel purple */
+  color: #6a4c93;
+  margin-bottom: 20px;
 }
 
+/* Decorative pastel element (creative touch) */
+.form-container::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 100px;
+  height: 100px;
+  background: #ffcad4;
+  border-radius: 50%;
+  z-index: 0;
+  opacity: 0.3;
+}
+
+/* Form styles */
 form {
   display: flex;
   flex-direction: column;
+  z-index: 1;
+  position: relative;
 }
 
 label {
-  margin-top: 10px;
-  margin-bottom: 5px;
+  margin-top: 12px;
+  margin-bottom: 6px;
   font-weight: bold;
   color: #444;
 }
 
 input {
   padding: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 8px;
+  background-color: #fefefe;
+  font-size: 15px;
+  transition: border-color 0.3s ease;
 }
 
+input:focus {
+  border-color: #a3d5d3;
+  outline: none;
+}
+
+/* Button style */
 button {
-  padding: 10px;
-  background-color: #a3d5d3; /* pastel teal */
+  padding: 12px;
+  background-color: #a3d5d3;
   color: #333;
+  font-weight: 600;
+  font-size: 16px;
   border: none;
+  border-radius: 8px;
   margin-top: 10px;
-  border-radius: 5px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.3s ease;
 }
 
 button:hover {
   background-color: #74b9b0;
+}
+
+/* Footer font tweak */
+footer {
+  font-size: 14px;
+  font-weight: 500;
 }

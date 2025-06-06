@@ -8,13 +8,14 @@ import Register from "./components/Register";
 import Logout from "./components/Logout";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import Orders from "./components/Orders";
 
 export const AppContext = createContext();
 
 function App() {
   const [users, setUsers] = useState([]);
-  const [user, setUser] = useState(null);
-  const [cart, setCart] = useState([]); // ✅ Added cart state
+  const [user, setUser] = useState({});
+  const [cart, setCart] = useState([]); 
 
   return (
     <AppContext.Provider value={{ users, setUsers, user, setUser, cart, setCart }}>
@@ -27,6 +28,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/orders" element={<Orders/>}/>
           </Routes>
         </main>
         <Footer />

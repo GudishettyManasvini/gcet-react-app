@@ -1,13 +1,87 @@
-/* Main container for the product list */
-.product-list-box {
-  padding: 40px;
-  background-color: #f9f9f9;
-  border-radius: 16px;
-  margin: 40px auto;
-  max-width: 900px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* wider boxes */
+  gap: 28px;
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Product Card - brighter pastel */
+.product-card {
+  background: linear-gradient(to top right, #ffffff, #ffe4ec);
+  border: 2px solid #f9c5d1; /* stronger pastel pink border */
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: center;
-  font-size: 24px;
-  color: #333;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative pastel shape */
+.product-card::before {
+  content: "";
+  position: absolute;
+  top: -25px;
+  left: -25px;
+  width: 100px;
+  height: 100px;
+  background: #a0e9e0; /* brighter pastel teal */
+  opacity: 0.3;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Product Title */
+.product-card h4 {
+  color: #6a4c93; /* pastel purple */
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  z-index: 1;
+  position: relative;
+}
+
+/* Description / Price */
+.product-card p {
+  margin-bottom: 14px;
+  font-weight: 500;
+  color: #444; /* strong enough for contrast */
+  font-size: 15px;
+  z-index: 1;
+  position: relative;
+}
+
+/* Call-to-action Button */
+.product-card button {
+  background-color: #8ecae6; /* pastel blue */
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  z-index: 1;
+  position: relative;
+}
+
+.product-card button:hover {
+  background-color: #62b3d0; /* slightly deeper blue */
+}
+.form-container {
+  max-width: 1500px; /* or 100% if you want full width */
+  margin: 40px auto;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.1);
 }
