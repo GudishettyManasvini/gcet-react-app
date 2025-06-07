@@ -29,7 +29,15 @@ export default function Login() {
     Navigate("/register");
   };
 
-  return (
+ return (
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      minHeight: "100vh",
+    }}
+  >
     <div className="form-container">
       <h3>Login</h3>
       {msg}
@@ -54,5 +62,6 @@ export default function Login() {
         <button onClick={goToRegister}>Create Account</button>
       </p>
     </div>
-  );
+  </div>
+);
 }

@@ -20,7 +20,8 @@ export default function Register() {
     }
   };
   return (
-    <div className="form-container" style={{ margin: "30px" }}>
+  <main style={{ minHeight: "100vh", display: "flex", justifyContent: "center", alignItems: "center", padding: "20px" }}>
+    <div className="form-container">
       <h3>Register</h3>
       <p>
         <input
@@ -46,11 +47,12 @@ export default function Register() {
       <button onClick={handleSubmit}>Submit</button>
       <hr />
       {users &&
-        users.map((value) => (
-          <li>
-            {value.name}-{value.email}-{value.pass}
+        users.map((value, i) => (
+          <li key={i}>
+            {value.name} - {value.email} - {value.pass}
           </li>
         ))}
     </div>
-  );
+  </main>
+);
 }

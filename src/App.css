@@ -3,6 +3,7 @@ body {
   background: linear-gradient(to right, #fdf6f0, #ffe8e0); /* soft gradient */
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 
 /* Keep your header and footer color */
@@ -31,26 +32,31 @@ nav a:hover {
 
 /* Main content area */
 main {
-  padding: 40px 20px;
+  padding: 40px ;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  min-height: 100vh;
+  
 }
 
 /* Stylish form container */
 .form-container {
   position: relative;
-  max-width: 450px;
   width: 100%;
-  background: linear-gradient(to bottom right, #ffffff, #fff0f4);
-  padding: 35px 30px;
+  max-width: 650px;          /* 👈 Bigger box */
+  background: #fff;
+  padding: 60px 40px;        /* 👈 More padding */
   border-radius: 20px;
-  box-shadow: 0px 8px 18px rgba(0, 0, 0, 0.12);
-  overflow: hidden;
-  transition: transform 0.3s ease;
+  box-shadow: 0px 8px 18px rgba(0, 0, 0, 0.1);
+  margin: 40px auto;         /* 👈 Center horizontally */
+  display: flex;
+  flex-direction: column;
+  align-items: center;       /* 👈 Center items inside */
+  justify-content: center;   /* 👈 Optional: center vertically if needed */
+  text-align: center;
 }
-
 .form-container:hover {
   transform: scale(1.02);
 }
