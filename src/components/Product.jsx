@@ -43,9 +43,14 @@ export default function Product() {
       <p style={{ color: "#d86c7a", fontSize: "22px", fontWeight: "bold" }}>Product List</p><br />
 
 
-      <div className="product-grid">
+   <div className="product-grid">
   {products.map(product => (
     <div key={product._id} className="product-card">
+      <img 
+        src={product.imgurl} 
+        alt={product.name} 
+        style={{ width: "100%", height: "200px", objectFit: "cover", borderRadius: "12px", marginBottom: "12px" }} 
+      />
       <h4>{product.name}</h4>
       <p>${product.price}</p>
       <p>{product.description}</p>
